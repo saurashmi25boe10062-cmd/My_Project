@@ -1,0 +1,22 @@
+import sqlite3
+
+def setup_clinical_database():
+    conn = sqlite3.connect('implant_registry.db')
+    cursor = conn.cursor()
+    
+    # Create tables based on your ER Diagram
+    cursor.execute('''CREATE TABLE IF NOT EXISTS Patients 
+                      (ID TEXT PRIMARY KEY, Name TEXT, BoneDensity FLOAT)''')
+    
+    cursor.execute('''CREATE TABLE IF NOT EXISTS LatticeData 
+                      (ModelID INTEGER PRIMARY KEY, PatientID TEXT, Porosity FLOAT, 
+                       FOREIGN KEY(PatientID) REFERENCES Patients(ID))''')
+    
+    # Insert Sample Data for Registration Number: 25BOE10062
+    cursor.execute("INSERT OR REPLACE INTO Patients VALUES ('25BOE10062', 'Saurashmi Bhattacharyya', 18.5)")
+    
+    conn.commit()
+    print("Database Initialized for Registration No: 25BOE10062")
+    conn.close()
+
+setup_clinical_database()
