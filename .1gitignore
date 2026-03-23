@@ -1,4 +1,4 @@
-class StructuralAnalyzer:
+ class StructuralAnalyzer:
     def __init__(self, material_eb=110e9): # Default Ti-6Al-4V (110 GPa)
         self.E_solid = material_eb
 
